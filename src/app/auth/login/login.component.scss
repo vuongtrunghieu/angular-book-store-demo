@@ -1,0 +1,45 @@
+.auth-login {
+  font-family: 'Questrial', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+}
+.hero.is-success {
+  background: #f2f6fa;
+}
+.hero .nav,
+.hero.is-success .nav {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.box {
+  margin-top: 5rem;
+}
+.avatar {
+  margin-top: -70px;
+  padding-bottom: 20px;
+}
+input {
+  font-weight: 300;
+}
+p {
+  font-weight: 700;
+}
+p.subtitle {
+  padding-top: 1rem;
+}
+
+.login-hr {
+  border-bottom: 1px solid black;
+}
+
+.has-text-black {
+  color: black;
+}
+
+.field {
+  padding-bottom: 10px;
+}
+
+.fa {
+  margin-left: 5px;
+}

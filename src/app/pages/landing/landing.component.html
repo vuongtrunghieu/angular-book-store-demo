@@ -1,0 +1,74 @@
+<div class="landing-page">
+  <section class="hero is-info is-fullheight">
+    <div class="hero-head">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="../">
+              <img src="https://ngrx.io/assets/images/badge.svg" alt="Logo" />
+            </a>
+            <span
+              class="navbar-burger burger"
+              data-target="navbarMenu"
+              [class.is-active]="showBurgerMenu"
+              (click)="showBurgerMenu = !showBurgerMenu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <div id="navbarMenu" class="navbar-menu" [class.is-active]="showBurgerMenu">
+            <div class="navbar-end">
+              <span class="navbar-item">
+                <a class="button is-white is-outlined" [routerLink]="['/login']">
+                  <span class="icon">
+                    <i class="fa fa-home"></i>
+                  </span>
+                  <span>Login</span>
+                </a>
+              </span>
+              <span class="navbar-item">
+                <a class="button is-white is-outlined" href="#">
+                  <span class="icon">
+                    <i class="fa fa-github"></i>
+                  </span>
+                  <span>View Source</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-6 is-offset-3">
+          <h1 class="title">
+            Welcome to Book store
+          </h1>
+          <h2 class="subtitle">
+            With so many titles, it is vital to give customers an easy way to find precisely the books they are looking for. Our search
+            engine enables customers to locate books by title, author, or keyword in a few seconds at most. Customers with a general idea of
+            what they want can use our Browse pages to sift through hundreds of categories to find exactly the right book. To further assist
+            users, we offer descriptions and reviews, and our See Inside program lets customers read excerpts from tens of thousands of
+            titles. We also offer editor recommendations and customer reviews on hundreds of thousands of titles.
+          </h2>
+          <div class="box">
+            <div class="field is-grouped">
+              <p class="control is-expanded">
+                <input class="input" type="text" placeholder="Looking for a book?" />
+              </p>
+              <p class="control">
+                <a class="button is-info" [routerLink]="['/login']">
+                  Let's get your book
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
