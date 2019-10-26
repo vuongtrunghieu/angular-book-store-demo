@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import data from '@assets/mock-data/mock-data.json';
 
 @Component({
   selector: 'app-book-list',
@@ -6,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./book-list.component.scss'],
 })
 export class BookListComponent implements OnInit {
-  constructor() {}
+  books: any[];
+  orderBy: string;
+
+  constructor() {
+    this.books = data;
+    this.orderBy = 'price';
+  }
 
   ngOnInit() {}
 }

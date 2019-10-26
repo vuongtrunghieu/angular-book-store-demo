@@ -1,0 +1,23 @@
+<nav class="store-sidemenu menu">
+  <p class="menu-label">
+    Menu
+  </p>
+  <ul class="menu-list">
+    <li>
+      <a [ngClass]="{'is-active': currentPage === 'list'}" (click)="changePage.emit('list')">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'book']"></fa-icon>
+        </span>
+        Books
+      </a>
+    </li>
+    <li>
+      <a [ngClass]="{'is-active': currentPage === 'cart'}" (click)="changePage.emit('cart')">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'shopping-basket']"></fa-icon>
+        </span>
+        Cart
+      </a>
+    </li>
+  </ul>
+</nav>

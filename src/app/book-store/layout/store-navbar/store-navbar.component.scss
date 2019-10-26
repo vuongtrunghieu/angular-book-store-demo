@@ -1,0 +1,7 @@
+@import '~assets/css/mixins';
+
+.store-navbar {
+  .navbar-item > * {
+    @include avoidSelectionHighlight();
+  }
+}

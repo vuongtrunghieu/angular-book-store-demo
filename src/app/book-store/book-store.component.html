@@ -1,0 +1,12 @@
+<app-store-navbar></app-store-navbar>
+<section class="section ">
+  <div class="columns ">
+    <div class="column is-4-tablet is-3-desktop is-2-widescreen">
+      <app-store-sidemenu [currentPage]="currentPage" (changePage)="changePage($event)"></app-store-sidemenu>
+    </div>
+    <main class="column ">
+      <app-book-list *ngIf="currentPage === 'list'"></app-book-list>
+      <app-cart *ngIf="currentPage === 'cart'"></app-cart>
+    </main>
+  </div>
+</section>

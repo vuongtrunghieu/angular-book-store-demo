@@ -5,7 +5,7 @@
         <div class="container">
           <div class="navbar-brand">
             <a class="navbar-item" href="../">
-              <img src="https://ngrx.io/assets/images/badge.svg" alt="Logo" />
+              <img src="assets/images/badge.svg" alt="Logo" />
             </a>
             <span
               class="navbar-burger burger"
@@ -19,6 +19,11 @@
             </span>
           </div>
           <div id="navbarMenu" class="navbar-menu" [class.is-active]="showBurgerMenu">
+            <div class="navbar-start">
+              <div class="navbar-item">
+                <small>The messy state Book store</small>
+              </div>
+            </div>
             <div class="navbar-end">
               <span class="navbar-item">
                 <a class="button is-white is-outlined" [routerLink]="['/login']">
@@ -29,7 +34,7 @@
                 </a>
               </span>
               <span class="navbar-item">
-                <a class="button is-white is-outlined" href="#">
+                <a class="button is-white is-outlined" href="https://github.com/vuongtrunghieu/angular-messy-state-demo" target="_blank">
                   <span class="icon">
                     <i class="fa fa-github"></i>
                   </span>

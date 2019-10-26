@@ -1,0 +1,54 @@
+<nav class="store-navbar navbar has-shadow">
+  <div class="navbar-brand">
+    <a class="navbar-item">
+      <img src="assets/images/badge.svg" />
+    </a>
+    <div [ngClass]="{ 'is-active': showBurger }" class="navbar-burger burger" (click)="showBurger = !showBurger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div [ngClass]="{ 'is-active': showBurger == true }" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item">
+        <small>The messy state Book store</small>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <div class="navbar-link">
+          Vuong Trung Hieu
+        </div>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" (click)="someAction()">
+            <div>
+              <span class="icon is-small">
+                <i class="fa fa-user-circle-o"></i>
+              </span>
+              Profile
+            </div>
+          </a>
+          <a class="navbar-item" href="https://github.com/vuongtrunghieu/angular-messy-state-demo" target="_blank">
+            <div>
+              <span class="icon is-small">
+                <i class="fa fa-bug"></i>
+              </span>
+              Report bug
+            </div>
+          </a>
+          <a class="navbar-item" [routerLink]="['/login']">
+            <div>
+              <span class="icon is-small">
+                <i class="fa fa-sign-out"></i>
+              </span>
+              Sign Out
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

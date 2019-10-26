@@ -1,0 +1,7 @@
+@import "~assets/css/mixins";
+
+.book-lists {
+  .title {
+    @include avoidSelectionHighlight();
+  }
+}

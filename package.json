@@ -1,5 +1,8 @@
 {
   "name": "without-ngrx-demo",
+  "author": "Vuong Trung Hieu",
+  "homepage": "https://github.com/vuongtrunghieu/angular-messy-state-demo",
+  "license": "MIT",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
@@ -19,6 +22,9 @@
     "@angular/platform-browser": "~8.2.9",
     "@angular/platform-browser-dynamic": "~8.2.9",
     "@angular/router": "~8.2.9",
+    "@fortawesome/angular-fontawesome": "^0.5.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "latest",
     "bulma": "^0.8.0",
     "node-sass": "^4.13.0",
     "rxjs": "~6.4.0",
