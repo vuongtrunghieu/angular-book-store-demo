@@ -1,4 +1,8 @@
-# WithoutNgrxDemo
+# Introduction
+
+Angular Book store app - a part of [**NgRx**](https://ngrx.io/) demo projects.
+
+This project is for author demonstrate purpose and project code is licensed under **MIT license**.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
 
