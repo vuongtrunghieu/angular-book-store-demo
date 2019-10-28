@@ -1,6 +1,8 @@
 @import "~assets/css/mixins";
 
 .book-lists {
+  position: relative;
+
   .title {
     @include avoidSelectionHighlight();
   }

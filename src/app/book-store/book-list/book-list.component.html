@@ -1,6 +1,5 @@
 <section class="book-lists">
   <h1 class="title">Books</h1>
-
   <nav class="level">
     <div class="level-left">
       <div class="level-item">
@@ -9,17 +8,15 @@
         </p>
       </div>
     </div>
-
-    <div class="level">
-      <div class="level-item">
+    <div class="level-item">
+      <div>
         <button type="button" class="button is-success">New</button>
       </div>
 
-      <div class="level-item is-hidden-tablet-only">
+      <div class="is-hidden-tablet-only">
         <app-book-search></app-book-search>
       </div>
     </div>
-
     <div class="level-right">
       <div class="level-item">
         Order by
@@ -35,7 +32,6 @@
       </div>
     </div>
   </nav>
-
   <div class="columns is-multiline">
     <div class="column is-12-tablet is-6-desktop is-4-widescreen" *ngFor="let book of books">
       <article class="box">
@@ -45,16 +41,19 @@
           </aside>
           <div class="media-content">
             <p class="title is-5 is-spaced is-marginless">
-              <a>{{ book.title }}</a>
+              <a (click)="onBookSelect(book)">{{ book.title }}</a>
             </p>
             <p class="subtitle is-marginless">${{ book.price }}</p>
             <div class="content is-small">
+              {{ book.author }} <br />
+              {{ book.author }} <br />
               {{ book.pages }} pages <br />
               ISBN: {{ book.ISBN }}
               <br />
-              <a>Edit</a>
-              <span>·</span>
-              <a>Delete</a>
+              <a (click)="addBookToCart(book)">
+                <fa-icon [icon]="['fas', 'cart-plus']"></fa-icon>
+                &nbsp;Add to cart
+              </a>
               <p></p>
             </div>
           </div>
@@ -62,7 +61,6 @@
       </article>
     </div>
   </div>
-
   <nav class="pagination">
     <a class="pagination-previous">Previous</a>
     <a class="pagination-next">Next page</a>
@@ -78,4 +76,5 @@
       </li>
     </ul>
   </nav>
+  <app-store-notification [message]="notiMessage"></app-store-notification>
 </section>

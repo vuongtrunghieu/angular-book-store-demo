@@ -1,1 +1,66 @@
-<p>cart works!</p>
+<section class="store-cart">
+  <h1 class="subtitle is-3">
+    <span class="has-text-grey-light">Cart Items </span>
+    <strong>{{ cartItems | cartCount }}</strong>
+  </h1>
+
+  <div class="columns is-desktop">
+    <div class="column">
+      <p class="heading">
+        <strong>Books</strong>
+      </p>
+      <ng-template [ngIf]="cartItems.length > 0" [ngIfElse]="noItems">
+        <table class="table is-bordered is-fullwidth">
+          <thead>
+            <tr>
+              <th class="is-narrow">Cover</th>
+              <th>Title</th>
+              <th class="has-text-right is-narrow">Price</th>
+              <th class="has-text-right is-narrow">Amount</th>
+              <th class="has-text-right is-narrow">Total</th>
+              <th class="has-text-right is-narrow">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cartItems">
+              <td>
+                <img [src]="'assets/images/' + item.book.image" alt="book" width="50" />
+              </td>
+              <td>
+                <a>
+                  <strong>
+                    {{ item.book.title }}
+                  </strong>
+                </a>
+                <small>- {{ item.book.author }}</small>
+              </td>
+              <td class="has-text-right">
+                {{ item.book.price | number: '1.2-2' }}
+              </td>
+              <td class="has-text-right">
+                <input class="input is-small" type="number" [(ngModel)]="item.amount" (ngModelChange)="onChangeAmount(item)" [min]="1"/>
+              </td>
+              <td class="has-text-right">
+                {{ item.book.price * item.amount | number: '1.2-2' }}
+              </td>
+              <td>
+                <button (click)="onRemoveItem(item)" class="button is-small is-danger">
+                  <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+                  &nbsp;Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="5" class="has-text-right">${{ cartItems | cartSum | number: '1.2-2' }}</th>
+            </tr>
+          </tfoot>
+        </table>
+      </ng-template>
+      <ng-template #noItems>
+        <p class="has-text-centered">Nothing here :(</p>
+      </ng-template>
+    </div>
+  </div>
+</section>

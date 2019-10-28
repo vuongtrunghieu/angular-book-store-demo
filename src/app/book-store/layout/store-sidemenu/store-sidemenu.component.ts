@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnI
 })
 export class StoreSidemenuComponent implements OnInit, OnChanges {
   @Input() currentPage: string;
+  @Input() cartItemsCount: number;
   @Output() changePage: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {}
@@ -17,6 +18,9 @@ export class StoreSidemenuComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.currentPage && changes.currentPage.currentValue) {
       this.currentPage = changes.currentPage.currentValue;
+    }
+    if (changes.cartItemsCount && changes.cartItemsCount.currentValue) {
+      this.cartItemsCount = changes.cartItemsCount.currentValue;
     }
   }
 }
