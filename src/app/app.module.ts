@@ -9,7 +9,7 @@ import { BookStoreComponent } from './book-store/book-store.component';
 import { BookListComponent } from './book-store/book-list/book-list.component';
 import { BookViewComponent } from './book-store/book-view/book-view.component';
 import { CartComponent } from './book-store/cart/cart.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBook, faCartPlus, faShoppingBasket, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { StoreNavbarComponent } from './book-store/layout/store-navbar/store-navbar.component';
@@ -54,7 +54,7 @@ const appRoutes: Routes = [
     CartItemsCountPipe,
     StoreNotificationComponent,
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, RouterModule.forRoot(appRoutes), FormsModule, FontAwesomeModule],
+  imports: [BrowserModule, BrowserAnimationsModule, RouterModule.forRoot(appRoutes), FormsModule, FontAwesomeModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

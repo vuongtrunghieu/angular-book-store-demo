@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-book-search',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./book-search.component.scss'],
 })
 export class BookSearchComponent implements OnInit {
-  constructor() {}
+  @Output() searchBooks: EventEmitter<string> = new EventEmitter<string>();
 
-  ngOnInit() {}
+  searchForm: FormControl;
+
+  constructor() {
+    this.searchForm = new FormControl('');
+  }
+
+  ngOnInit() {
+    this.searchForm.valueChanges.subscribe(res => this.searchBooks.emit(res));
+  }
 }
