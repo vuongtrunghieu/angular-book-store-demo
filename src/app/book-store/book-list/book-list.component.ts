@@ -1,52 +1,72 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import data from '@assets/mock-data/mock-data.json';
-import { BookModel } from '@app/book-store/book-list/models/book.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BookModel } from '@app/book-store/models/book.model';
+import { BookStoreService } from '@app/book-store/services/book-store.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss'],
 })
-export class BookListComponent implements OnInit {
-  @Output() selectBook: EventEmitter<BookModel> = new EventEmitter<BookModel>();
-  @Output() addItemToCart: EventEmitter<BookModel> = new EventEmitter<BookModel>();
+export class BookListComponent implements OnInit, OnDestroy {
+  private _unsubscribe: Subject<void> = new Subject<void>();
+  private _reservedBooksData: BookModel[];
 
   books: BookModel[];
-  notiMessage: string;
   orderBy: string;
   orderDirection: string;
 
-  constructor() {
-    this.books = data;
+  constructor(private readonly _bookService: BookStoreService) {
     this.orderBy = 'price';
     this.orderDirection = 'asc';
-    this.notiMessage = '';
   }
 
   ngOnInit() {
+    this._bookService.books$.pipe(takeUntil(this._unsubscribe)).subscribe(data => {
+      this.books = [...data];
+      this._reservedBooksData = [...data];
+    });
     this.onSort();
   }
 
-  onBookSelect(book: BookModel): void {
-    this.selectBook.emit(book);
+  ngOnDestroy(): void {
+    this._unsubscribe.next();
+    this._unsubscribe.complete();
   }
 
+  onBookSelect(book: BookModel): void {}
+
   addBookToCart(book: BookModel) {
-    this.addItemToCart.emit(book);
-    this.notiMessage = `${book.title} added to cart`;
+    const cartItems = this._bookService.cartSource$.getValue();
+    const index = cartItems.findIndex(item => item.book.id === book.id);
+    if (index !== -1) {
+      this._bookService.cartSource$.next(
+        cartItems.map((item, itemIndex) => {
+          if (itemIndex === index) {
+            item.amount++;
+          }
+          return item;
+        }),
+      );
+    } else {
+      this._bookService.cartSource$.next([...cartItems, { book, amount: 1 }]);
+    }
+
+    this._bookService.setNotification(`${book.title} added to cart`);
   }
 
   onSearchBooks(searchText: string): void {
     if (searchText) {
       this.books = [
-        ...data.filter(
+        ...this._reservedBooksData.filter(
           book =>
             book.title.toLocaleLowerCase().includes(searchText.toLocaleLowerCase().trim()) ||
             book.author.toLocaleLowerCase().includes(searchText.toLocaleLowerCase().trim()),
         ),
       ];
     } else {
-      this.books = data;
+      this.books = [...this._reservedBooksData];
     }
   }
 

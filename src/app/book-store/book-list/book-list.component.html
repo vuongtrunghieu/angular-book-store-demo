@@ -1,87 +1,97 @@
-<section class="book-lists">
-  <h1 class="title">Books</h1>
-  <nav class="level">
-    <div class="level-left">
-      <div class="level-item">
-        <p class="subtitle is-5">
-          <strong>{{ books.length }}</strong> books
-        </p>
-      </div>
+<app-store-navbar></app-store-navbar>
+<section class="section ">
+  <div class="columns ">
+    <div class="column is-4-tablet is-3-desktop is-2-widescreen">
+      <app-store-sidemenu></app-store-sidemenu>
     </div>
-    <div class="level-item">
-      <div>
-        <button type="button" class="button is-success">New</button>
-      </div>
-
-      <div class="is-hidden-tablet-only">
-        <app-book-search (searchBooks)="onSearchBooks($event)"></app-book-search>
-      </div>
-    </div>
-    <div class="level-right">
-      <div class="level-item">
-        Order by
-      </div>
-      <div class="level-item">
-        <div class="select">
-          <select [(ngModel)]="orderBy" (ngModelChange)="onSort()">
-            <option value="title">Title</option>
-            <option value="price">Price</option>
-            <option value="pages">Page count</option>
-          </select>
-        </div>
-      </div>
-      <div class="level-item">
-        <div class="select">
-          <select [(ngModel)]="orderDirection" (ngModelChange)="onSort()">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <div class="columns is-multiline">
-    <div class="column is-12-tablet is-6-desktop is-4-widescreen" *ngFor="let book of books">
-      <article class="box">
-        <div class="media">
-          <aside class="media-left">
-            <img src="assets/images/{{ book.image }}" width="80" />
-          </aside>
-          <div class="media-content">
-            <p class="title is-5 is-spaced is-marginless">
-              <a (click)="onBookSelect(book)">{{ book.title }}</a>
-            </p>
-            <p class="subtitle is-marginless">${{ book.price }}</p>
-            <div class="content is-small">
-              {{ book.author }} <br />
-              {{ book.pages }} pages <br />
-              ISBN: {{ book.ISBN }}
-              <br />
-              <a (click)="addBookToCart(book)">
-                <fa-icon [icon]="['fas', 'cart-plus']"></fa-icon>
-                &nbsp;Add to cart
-              </a>
-              <p></p>
+    <main class="column ">
+      <section class="book-lists">
+        <h1 class="title">Books</h1>
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <p class="subtitle is-5">
+                <strong>{{ books.length }}</strong> books
+              </p>
             </div>
           </div>
+          <div class="level-item">
+            <div>
+              <button type="button" class="button is-success">New</button>
+            </div>
+
+            <div class="is-hidden-tablet-only">
+              <app-book-search (searchBooks)="onSearchBooks($event)"></app-book-search>
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item">
+              Order by
+            </div>
+            <div class="level-item">
+              <div class="select">
+                <select [(ngModel)]="orderBy" (ngModelChange)="onSort()">
+                  <option value="title">Title</option>
+                  <option value="price">Price</option>
+                  <option value="pages">Page count</option>
+                </select>
+              </div>
+            </div>
+            <div class="level-item">
+              <div class="select">
+                <select [(ngModel)]="orderDirection" (ngModelChange)="onSort()">
+                  <option value="asc">Ascending</option>
+                  <option value="desc">Descending</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="columns is-multiline">
+          <div class="column is-12-tablet is-6-desktop is-4-widescreen" *ngFor="let book of books">
+            <article class="box">
+              <div class="media">
+                <aside class="media-left">
+                  <img src="assets/images/{{ book.image }}" width="80" />
+                </aside>
+                <div class="media-content">
+                  <p class="title is-5 is-spaced is-marginless">
+                    <a (click)="onBookSelect(book)">{{ book.title }}</a>
+                  </p>
+                  <p class="subtitle is-marginless">${{ book.price }}</p>
+                  <div class="content is-small">
+                    {{ book.author }} <br />
+                    {{ book.pages }} pages <br />
+                    ISBN: {{ book.ISBN }}
+                    <br />
+                    <a (click)="addBookToCart(book)">
+                      <fa-icon [icon]="['fas', 'cart-plus']"></fa-icon>
+                      &nbsp;Add to cart
+                    </a>
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
-      </article>
-    </div>
+        <nav class="pagination">
+          <a class="pagination-previous">Previous</a>
+          <a class="pagination-next">Next page</a>
+          <ul class="pagination-list">
+            <li>
+              <a class="pagination-link">1</a>
+            </li>
+            <li>
+              <span class="pagination-ellipsis">…</span>
+            </li>
+            <li>
+              <a class="pagination-link">1</a>
+            </li>
+          </ul>
+        </nav>
+        <app-store-notification></app-store-notification>
+      </section>
+    </main>
   </div>
-  <nav class="pagination">
-    <a class="pagination-previous">Previous</a>
-    <a class="pagination-next">Next page</a>
-    <ul class="pagination-list">
-      <li>
-        <a class="pagination-link">1</a>
-      </li>
-      <li>
-        <span class="pagination-ellipsis">…</span>
-      </li>
-      <li>
-        <a class="pagination-link">1</a>
-      </li>
-    </ul>
-  </nav>
-  <app-store-notification [message]="notiMessage"></app-store-notification>
 </section>

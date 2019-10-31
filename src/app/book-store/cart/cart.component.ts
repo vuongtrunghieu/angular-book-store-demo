@@ -1,23 +1,30 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { CartItemModel } from '@app/book-store/cart/models/cartItemModel';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CartItemModel } from '@app/book-store/models/cart-item.model';
+import { BookStoreService } from '@app/book-store/services/book-store.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CartComponent implements OnInit, OnChanges {
-  @Input() cartItems: CartItemModel[];
+export class CartComponent implements OnInit, OnDestroy {
+  private _unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor() {}
+  cartItems: CartItemModel[];
 
-  ngOnInit() {}
+  constructor(private readonly _bookService: BookStoreService) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.cartItems && changes.cartItems.currentValue) {
-      this.cartItems = changes.cartItems.currentValue;
-    }
+  ngOnInit() {
+    this._bookService.cartSource$.pipe(takeUntil(this._unsubscribe)).subscribe(data => {
+      this.cartItems = data;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribe.next();
+    this._unsubscribe.complete();
   }
 
   onChangeAmount(item: CartItemModel) {
@@ -30,6 +37,7 @@ export class CartComponent implements OnInit, OnChanges {
         }
         return cartItem;
       });
+      this._bookService.cartSource$.next(this.cartItems);
     }
   }
 
@@ -38,6 +46,7 @@ export class CartComponent implements OnInit, OnChanges {
 
     if (index !== -1) {
       this.cartItems = this.cartItems.filter(cartItem => cartItem.book.id !== item.book.id);
+      this._bookService.cartSource$.next(this.cartItems);
     }
   }
 }

@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { animate, group, state, style, transition, trigger } from '@angular/animations';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { animate, group, style, transition, trigger } from '@angular/animations';
+import { BookStoreService } from '@app/book-store/services/book-store.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-store-notification',
   templateUrl: './store-notification.component.html',
   styleUrls: ['./store-notification.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slide', [
       transition(':enter', [style({ transform: 'translate3d(0, 100%, 0)' }), animate(250)]),
@@ -28,22 +30,25 @@ import { animate, group, state, style, transition, trigger } from '@angular/anim
     ]),
   ],
 })
-export class StoreNotificationComponent implements OnInit, OnChanges {
-  @Input() message: string;
+export class StoreNotificationComponent implements OnInit, OnDestroy {
+  private _unsubscribe: Subject<void> = new Subject<void>();
+
+  message: string;
   show: boolean;
 
-  constructor() {
+  constructor(private readonly _bookService: BookStoreService) {
     this.show = false;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._bookService.notify$.pipe(takeUntil(this._unsubscribe)).subscribe(message => {
+      this.message = message;
+      this.show = true;
+    });
+  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.message && changes.message.currentValue) {
-      this.message = changes.message.currentValue;
-      if (this.message) {
-        this.show = true;
-      }
-    }
+  ngOnDestroy(): void {
+    this._unsubscribe.next();
+    this._unsubscribe.complete();
   }
 }

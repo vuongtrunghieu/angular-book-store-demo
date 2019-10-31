@@ -4,7 +4,7 @@
   </p>
   <ul class="menu-list">
     <li>
-      <a [ngClass]="{'is-active': currentPage === 'list'}" (click)="changePage.emit('list')">
+      <a [routerLinkActive]="['is-active']" [routerLink]="['/store', 'list']">
         <span class="icon">
           <fa-icon [icon]="['fas', 'book']"></fa-icon>
         </span>
@@ -12,12 +12,12 @@
       </a>
     </li>
     <li>
-      <a [ngClass]="{'is-active': currentPage === 'cart'}" (click)="changePage.emit('cart')">
+      <a [routerLinkActive]="['is-active']" [routerLink]="['/store', 'cart']">
         <span class="icon">
           <fa-icon [icon]="['fas', 'shopping-basket']"></fa-icon>
         </span>
         Cart
-        <span class="tag is-primary">{{ cartItemsCount }}</span>
+        <span class="tag is-primary">{{ bookService.cartSource$ | async | cartCount }}</span>
       </a>
     </li>
   </ul>

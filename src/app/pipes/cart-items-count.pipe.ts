@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CartItemModel } from '@app/book-store/cart/models/cartItemModel';
+import { CartItemModel } from '@app/book-store/models/cart-item.model';
 
 @Pipe({
   name: 'cartCount',
