@@ -7,7 +7,7 @@ import { BookStoreService } from '@app/book-store/services/book-store.service';
   styleUrls: ['./store-sidemenu.component.scss'],
 })
 export class StoreSidemenuComponent implements OnInit {
-  constructor(protected bookService: BookStoreService) {}
+  constructor(public bookService: BookStoreService) {}
 
   ngOnInit() {}
 }
