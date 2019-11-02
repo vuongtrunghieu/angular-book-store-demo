@@ -56,7 +56,7 @@
                 </aside>
                 <div class="media-content">
                   <p class="title is-5 is-spaced is-marginless">
-                    <a (click)="onBookSelect(book)">{{ book.title }}</a>
+                    <a [routerLink]="['/store/view', book.id]">{{ book.title }}</a>
                   </p>
                   <p class="subtitle is-marginless">${{ book.price }}</p>
                   <div class="content is-small">

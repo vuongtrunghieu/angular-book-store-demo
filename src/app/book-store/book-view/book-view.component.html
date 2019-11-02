@@ -1,78 +1,78 @@
-<nav class="breadcrumb">
-  <ul>
-    <li>
-      <a [routerLink]="['/books']">Books</a>
-    </li>
-    <li class="is-active">
-      <a>Edit book</a>
-    </li>
-  </ul>
-</nav>
-<form>
-  <div class="field">
-    <div class="field">
-      <label class="label">Title</label>
-      <div class="control">
-        <input class="input is-large" type="text" placeholder="e.g. Designing with Bulma" value="{{ book?.title }}" required="">
-      </div>
+<app-store-navbar></app-store-navbar>
+<section class="section ">
+  <div class="columns ">
+    <div class="column is-4-tablet is-3-desktop is-2-widescreen">
+      <app-store-sidemenu></app-store-sidemenu>
     </div>
-  </div>
-
-  <div class="columns is-desktop">
-    <div class="column">
-      <label class="label">Price</label>
-      <div class="control has-icons-left">
-        <input class="input" type="number" placeholder="e.g. 22.99" value="{{ book?.price }}" required="">
-        <span class="icon is-small is-left">
-              <i class="fa fa-dollar"></i>
+    <main class="column ">
+      <nav class="breadcrumb">
+        <ul>
+          <li>
+            <a [routerLink]="['/store']">Books</a>
+          </li>
+          <li class="is-active">
+            <a>Book details</a>
+          </li>
+          <li *ngIf="book" class="is-active">
+            <a>{{ book.title }}</a>
+          </li>
+        </ul>
+      </nav>
+      <ng-template [ngIf]="book" [ngIfElse]="notFound">
+        <div class="columns">
+          <div class="column is-one-third">
+            <img src="assets/images/{{ book.image }}" width="100%" />
+          </div>
+          <div class="column">
+            <div class="columns">
+              <h3 class="column is-size-4 has-text-weight-bold">{{ book.title }}</h3>
+              <h2 class="column is-size-4 has-text-info has-text-right">${{ book.price }}</h2>
+            </div>
+            <h5 class="is-size-6">
+              <span class="has-text-weight-semibold">Author: </span>
+              <span>{{ book.author }}</span>
+            </h5>
+            <h5 class="is-size-6">
+              <span class="has-text-weight-semibold">Rating: </span>
+              <span>
+              <img
+                *ngFor="let item of [].constructor(book.rating)"
+                style="margin-right: 0.125rem"
+                src="assets/images/star-yellow.svg"
+                alt="+"
+                width="16"
+              />
             </span>
-      </div>
-    </div>
-
-    <div class="column">
-      <label class="label">Pages</label>
-      <div class="control">
-        <input class="input" type="number" placeholder="e.g. 270" value="{{ book?.pages }}" required="">
-      </div>
-    </div>
-
-    <div class="column">
-      <label class="label">ISBN</label>
-      <div class="control">
-        <input class="input" type="text" placeholder="e.g. 9781939902351" value="{{ book?.ISBN }}" required="">
-      </div>
-    </div>
+              <span>
+              <img
+                *ngFor="let item of [].constructor(5 - book.rating)"
+                style="margin-right: 0.125rem"
+                src="assets/images/star-white.svg"
+                alt="+"
+                width="16"
+              />
+            </span>
+            </h5>
+            <h5 class="is-size-6">
+              <span class="has-text-weight-semibold">Pages: </span>
+              <span>{{ book.pages }}</span>
+            </h5>
+            <h5 class="is-size-6">
+              <span class="has-text-weight-semibold">ISBN: </span>
+              <span>{{ book.ISBN }}</span>
+            </h5>
+            <h5 class="is-size-6 has-text-weight-semibold" style="margin-top: 1rem;">Description:</h5>
+            <p>{{ book.description }}</p>
+          </div>
+        </div>
+        <div class="buttons">
+          <a class="button is-medium is-info" (click)="addBookToCart(book)">Add to cart</a>
+        </div>
+      </ng-template>
+      <ng-template #notFound>
+        <h3 class="is-text has-text-centered has-text-danger">Book not found!</h3>
+      </ng-template>
+      <app-store-notification></app-store-notification>
+    </main>
   </div>
-
-  <div class="field">
-    <label class="label">Cover image</label>
-    <div class="control">
-      <img src="assets/images/{{book?.image}}">
-    </div>
-    <div class="control">
-      <div class="file has-name">
-        <label class="file-label">
-          <input class="file-input" type="file">
-          <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fa fa-upload"></i>
-                </span>
-                <span class="file-label">
-                  Choose a file…
-                </span>
-              </span>
-          <span class="file-name">
-                ../{{ book?.image }}
-              </span>
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="buttons">
-      <a class="button is-medium is-success">Save changes</a>
-      <a class="button is-medium is-light">Cancel</a>
-    </div>
-  </div>
-</form>
+</section>

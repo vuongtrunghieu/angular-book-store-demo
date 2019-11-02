@@ -35,8 +35,6 @@ export class BookListComponent implements OnInit, OnDestroy {
     this._unsubscribe.complete();
   }
 
-  onBookSelect(book: BookModel): void {}
-
   addBookToCart(book: BookModel) {
     const cartItems = this._bookService.cartSource$.getValue();
     const index = cartItems.findIndex(item => item.book.id === book.id);
