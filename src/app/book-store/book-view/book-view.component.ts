@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { BookModel } from '@app/book-store/book-list/models/book.model';
 
 @Component({
@@ -9,6 +9,7 @@ import { BookModel } from '@app/book-store/book-list/models/book.model';
 })
 export class BookViewComponent implements OnInit, OnChanges {
   @Input() book: BookModel;
+  @Output() addBookToCart: EventEmitter<BookModel> = new EventEmitter<BookModel>();
 
   constructor() {}
 
@@ -18,5 +19,9 @@ export class BookViewComponent implements OnInit, OnChanges {
     if (changes.book && changes.book.currentValue) {
       this.book = changes.book.currentValue;
     }
+  }
+
+  addBook(book: BookModel) {
+    this.addBookToCart.emit(book);
   }
 }

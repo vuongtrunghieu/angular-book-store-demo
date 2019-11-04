@@ -48,4 +48,8 @@ export class BookStoreComponent implements OnInit {
       this.cartItems = [...this.cartItems, { book, amount: 1 }];
     }
   }
+
+  changeCartItems(cart: CartItemModel[]) {
+    this.cartItems = [...cart];
+  }
 }

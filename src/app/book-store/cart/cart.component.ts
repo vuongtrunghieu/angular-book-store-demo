@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CartItemModel } from '@app/book-store/cart/models/cartItemModel';
 
 @Component({
@@ -9,6 +9,7 @@ import { CartItemModel } from '@app/book-store/cart/models/cartItemModel';
 })
 export class CartComponent implements OnInit, OnChanges {
   @Input() cartItems: CartItemModel[];
+  @Output() changeCartItems: EventEmitter<CartItemModel[]> = new EventEmitter<CartItemModel[]>();
 
   constructor() {}
 
@@ -30,6 +31,7 @@ export class CartComponent implements OnInit, OnChanges {
         }
         return cartItem;
       });
+      this.changeCartItems.emit(this.cartItems);
     }
   }
 
@@ -38,6 +40,7 @@ export class CartComponent implements OnInit, OnChanges {
 
     if (index !== -1) {
       this.cartItems = this.cartItems.filter(cartItem => cartItem.book.id !== item.book.id);
+      this.changeCartItems.emit(this.cartItems);
     }
   }
 }

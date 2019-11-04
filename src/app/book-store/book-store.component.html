@@ -14,8 +14,8 @@
         (selectBook)="goToBookView($event)"
         (addItemToCart)="addItemToCart($event)"
       ></app-book-list>
-      <app-book-view *ngIf="currentPage === 'book_view'" [book]="selectedBook"></app-book-view>
-      <app-cart *ngIf="currentPage === 'cart'" [cartItems]="cartItems"></app-cart>
+      <app-book-view *ngIf="currentPage === 'book_view'" [book]="selectedBook" (addBookToCart)="addItemToCart($event)"></app-book-view>
+      <app-cart *ngIf="currentPage === 'cart'" [cartItems]="cartItems" (changeCartItems)="changeCartItems($event)"></app-cart>
     </main>
   </div>
 </section>
